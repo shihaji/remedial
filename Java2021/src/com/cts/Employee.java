@@ -1,6 +1,6 @@
 package com.cts;
 
-public class Employee extends Object {
+public class Employee  implements Comparable<Employee>{
 
 	int id;
 	String name;
@@ -9,6 +9,17 @@ public class Employee extends Object {
 	public Employee() {
 
 	}
+	
+	
+
+	public Employee(int id, String name, int salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+	}
+
+
 
 	public void work() {
 
@@ -18,15 +29,21 @@ public class Employee extends Object {
 	public String toString() {
 		return id + "  " + name + "   " + salary;
 	}
-	
-	public boolean equals(Object obj) {
-		Employee e = (Employee) obj;
-		return this.id == e.id && e.name.equals(this.name);
 
+
+
+	@Override
+	public int compareTo(Employee o) {
+	 
+		if(this.id>o.id) {
+			return 1;
+		}else {
+			return -1;
+		}
+		
+		
 	}
-
+	
+	
 }
 
-// super = calls the super class method, used in overridden method , no need to be first statement
-
-// super()= calls the super class constructor, used in constructor as first statement
