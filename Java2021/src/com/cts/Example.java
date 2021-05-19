@@ -10,30 +10,45 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Example {
 
 	public static void main(String[] args) throws Exception {
 
-		Integer a=200;
 		
-		Integer b=20;
+		Set<Employee> set=new HashSet<Employee>();
 		
-		System.out.println(a.compareTo(b));
+		Employee emp=new Employee(900,"xyz",55000);  //1001
+		
+		Employee emp1=emp;   //1001
+		
+		set.add(emp);
+		
+		set.add(emp1);
+		set.add(new Employee(100,"abc",25000)); //1002
+		
+		set.add(new Employee(100,"abc",25000)); // 1003
+		
+		set.add(new Employee(200,"def",25000)); // 1004
+		
+		set.add(new Employee(300,"mno",25000)); // 1005
+		
+		System.out.println(set);
+		
+		// first hashcode
+		// ==
+		// equals 
 		
 		
-	    
-		List<Employee> list=new ArrayList<Employee>();
-		
-		list.add(new Employee(500,"def",50000)); // 1 1.compareTo(2)
-		list.add(new Employee(300,"mno",60000)); // 2 2.compareTo(3)
-		list.add(new Employee(200,"abd",55000)); //3  3.compareTo(4)
-		list.add(new Employee(100,"pqr",54000)); //4
 		
 		
-		Collections.sort(list);
 		
-		System.out.println(list);
+		
+	
+		
+		
 		
 		
 		

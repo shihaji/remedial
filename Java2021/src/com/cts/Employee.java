@@ -1,6 +1,6 @@
 package com.cts;
 
-public class Employee  implements Comparable<Employee>{
+public class Employee  extends Object implements Comparable<Employee>{
 
 	int id;
 	String name;
@@ -35,15 +35,28 @@ public class Employee  implements Comparable<Employee>{
 	@Override
 	public int compareTo(Employee o) {
 	 
-		if(this.id>o.id) {
-			return 1;
-		}else {
-			return -1;
-		}
-		
+		return this.name.compareTo(o.name);
 		
 	}
 	
+	public int hashCode() {
+				
+		
+		
+		
+		System.out.println(this.id+" hashcode called ");
+		
+		return this.id;
+		
+	}
+	
+	
+	public boolean equals(Object o) {
+		System.out.println("equals called");
+		Employee emp=(Employee)o;
+		
+		return this.id==emp.id && this.name.equals(emp.name);
+	}
 	
 }
 
