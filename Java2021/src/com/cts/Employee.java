@@ -35,7 +35,8 @@ public class Employee  extends Object implements Comparable<Employee>{
 	@Override
 	public int compareTo(Employee o) {
 	 
-		return this.name.compareTo(o.name);
+		System.out.println("compare to called ");
+		return o.name.compareTo(this.name);
 		
 	}
 	
