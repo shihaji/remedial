@@ -15,43 +15,57 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Example {
 
 	public static void main(String[] args) throws Exception {
 
-		Atm atm=new Atm() {
+		List<Integer> list=new ArrayList<Integer>();
+		
+		list.add(10);
+		list.add(5);
+		list.add(10);
+		list.add(50);
+		list.add(100);
+		list.add(25);
+		//list.add(102);
+		//list.add(53);
+		
+		
+		int k=list.stream()
+		
+		.filter(t->t%2==0)
+		.map(t->t+5)
+		.reduce((t,u)-> t+u)
+		.get();
+		
+		System.out.println(k);
+		
+		
+		boolean b=list.stream().allMatch(new Predicate<Integer>() {
 
-			int balance;
 			@Override
-			public void atmDeposit(int amount) {
-				this.balance+=amount;
-				System.out.println(this.balance);	
-				
-			}
-
-			@Override
-			public void atmWithdraw(int amount) {
-				this.balance-=amount;
-				System.out.println(this.balance);
-				
+			public boolean test(Integer t) {
+			
+				return t%5==0;
 			}
 			
-		};
+		});
 		
-		letc(atm);
+		System.out.println(b);
 		
+		
+		List<Integer> l1=list.stream().distinct().collect(Collectors.toList());
 	
+		System.out.println(l1);
 		
 	}
 	
-	
-	public static void letc(Atm atm) {
-		
-		atm.atmDeposit(10000);
-		
-		atm.atmWithdraw(2000);
-	}
 	
 	
 }
