@@ -25,12 +25,16 @@ public class Example {
 
 	public static void main(String[] args) throws Exception {
 
-		MyThread mt=new MyThread();
+		Account account=new Account();
 		
-		mt.start();
+		Thread husband=new Thread(account);
+		husband.setName("husband");
 		
-		mt.join();
-		System.out.println(mt.total);
+		Thread wife=new Thread(account);
+		wife.setName("wife");
+		
+		husband.start();
+		wife.start();
 		
 		
 				
@@ -40,26 +44,35 @@ public class Example {
 }
 
 
-class MyThread extends Thread{
+class Account implements Runnable{
 	
-	int total=100;
+	int balance=5000;   // instance variable not thread safe
 	
-	public void run() { //here
-		System.out.println("second thread");
+	public  void checkBalance() {
 		
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		for(int i=0;i<10;i++) {
-			
-			total+=i;
-		}
+		System.out.println("Balance before withdrawal "+Thread.currentThread().getName()+" is "+this.balance);
 	}
 	
+	public  void withdraw() {
+		int bal=0;     // local variable is thread safe as they have a local copy
+		System.out.println("local variable "+bal);
+		bal=this.balance-5000;  //wife first
+		this.balance=bal;
+		System.out.println("Balance after withdrawal "+Thread.currentThread().getName()+" is "+this.balance);
+
+	}
+	
+	public void run() {
+		
+		synchronized (this) {
+			checkBalance();
+			
+			withdraw();
+		}
+		
+		
+		
+	}
+	
+	
 }
-
-
-
