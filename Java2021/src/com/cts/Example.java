@@ -25,50 +25,39 @@ public class Example {
 
 	public static void main(String[] args) throws Exception {
 
-		List<Integer> list=new ArrayList<Integer>();
+		MyThread mt=new MyThread();
 		
-		list.add(10);
-		list.add(5);
-		list.add(10);
-		list.add(50);
-		list.add(100);
-		list.add(25);
-		//list.add(102);
-		//list.add(53);
+		mt.start();
+		
+		mt.join();
+		System.out.println(mt.total);
 		
 		
-		int k=list.stream()
-		
-		.filter(t->t%2==0)
-		.map(t->t+5)
-		.reduce((t,u)-> t+u)
-		.get();
-		
-		System.out.println(k);
-		
-		
-		boolean b=list.stream().allMatch(new Predicate<Integer>() {
-
-			@Override
-			public boolean test(Integer t) {
-			
-				return t%5==0;
-			}
-			
-		});
-		
-		System.out.println(b);
-		
-		
-		List<Integer> l1=list.stream().distinct().collect(Collectors.toList());
-	
-		System.out.println(l1);
-		
-		
-		
+				
 	}
 	
+		
+}
+
+
+class MyThread extends Thread{
 	
+	int total=100;
+	
+	public void run() { //here
+		System.out.println("second thread");
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(int i=0;i<10;i++) {
+			
+			total+=i;
+		}
+	}
 	
 }
 
